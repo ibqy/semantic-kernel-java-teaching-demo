@@ -1,0 +1,11 @@
+# =============================================================================
+# Git 忽略规则
+target/
+.idea/
+*.iml
+.classpath
+.project
+.settings/
+.vscode/
+*.log
+.DS_Store
