@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Semantic Kernel Java 教学指南</title>
+<style>
+  :root{--bg:#0f1115;--panel:#171a21;--panel2:#1e222b;--line:#2b3140;--text:#e6e9f0;--muted:#9aa3b5;--accent:#00a4ff;--accent2:#7c6bff;--green:#34d399;--yellow:#fbbf24;--red:#f87171;--code:#0b0d12}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--text);font-family:"HarmonyOS Sans SC","PingFang SC","Microsoft YaHei",system-ui,sans-serif;line-height:1.7}
+  .wrap{max-width:1080px;margin:0 auto;padding:28px 22px 90px}
+  header.hero{background:linear-gradient(135deg,#0e2233 0%,#171a21 60%);border:1px solid var(--line);border-radius:18px;padding:44px 38px;margin-bottom:34px;position:relative;overflow:hidden}
+  header.hero::before{content:"";position:absolute;right:-60px;top:-60px;width:260px;height:260px;background:radial-gradient(circle,rgba(0,164,255,.18),transparent 70%)}
+  .tag{display:inline-block;background:rgba(0,164,255,.14);color:var(--accent);border:1px solid rgba(0,164,255,.35);padding:4px 12px;border-radius:999px;font-size:13px;letter-spacing:.5px}
+  h1{font-size:32px;margin:16px 0 8px;font-weight:800}
+  .sub{color:var(--muted);font-size:15px}
+  h2{font-size:23px;margin:54px 0 4px;color:#fff;border-left:4px solid var(--accent);padding-left:12px}
+  h3{font-size:18px;margin:26px 0 8px;color:#fff}
+  p{color:var(--text)}
+  .muted{color:var(--muted)}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:20px 22px;margin:16px 0}
+  .demo{display:grid;grid-template-columns:24px 1fr;gap:14px;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:14px 0;transition:transform .15s}
+  .demo:hover{transform:translateY(-2px)}
+  .num{width:26px;height:26px;border-radius:8px;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#04121f;font-weight:800;display:flex;align-items:center;justify-content:center;font-size:14px}
+  .demo b{font-size:16px;color:#fff}
+  .demo .muted{font-size:14px}
+  code{background:rgba(0,164,255,.1);color:#7fd4ff;padding:2px 6px;border-radius:5px;font-family:"JetBrains Mono","Fira Code",monospace;font-size:13px}
+  pre{background:var(--code);border:1px solid var(--line);border-radius:11px;padding:16px 18px;overflow-x:auto;font-family:"JetBrains Mono",monospace;font-size:13px;line-height:1.6}
+  pre .c{color:#6b7688}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  @media(max-width:720px){.grid2{grid-template-columns:1fr}}
+  table{width:100%;border-collapse:collapse;margin:16px 0;font-size:14px}
+  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line)}
+  th{color:#fff;background:var(--panel2)}
+  .pill{display:inline-block;font-size:12px;padding:1px 8px;border-radius:999px;margin-right:6px}
+  .pill.a{background:rgba(52,211,153,.14);color:var(--green);border:1px solid rgba(52,211,153,.3)}
+  .pill.b{background:rgba(251,191,36,.12);color:var(--yellow);border:1px solid rgba(251,191,36,.3)}
+  footer{margin-top:60px;color:var(--muted);font-size:13px;border-top:1px solid var(--line);padding-top:20px;text-align:center}
+  a{color:var(--accent);text-decoration:none}
+  a:hover{text-decoration:underline}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="hero">
+  <span class="tag">MICROSOFT SEMANTIC KERNEL FOR JAVA</span>
+  <h1>Semantic Kernel Java 教学演示</h1>
+  <div class="sub">demo01 ~ demo11 渐进式教学 &middot; SDK 1.5.0 + Spring Boot 3.4.4 + Java 21</div>
+</header>
+
+<p>本工程用 <b>11 个循序渐进的 Demo</b> 带零基础读者上手 <b>Microsoft Semantic Kernel for Java</b>——一个面向企业级应用的 LLM 编排框架，核心概念是 <code class="pill b">Kernel</code>（内核）+ <code class="pill b">Plugin</code>（函数插件）+ <code class="pill b">ChatHistory</code>（对话历史）。所有示例都采用 OpenAI 兼容协议，可对接本地网关（vLLM / Ollama 等）。</p>
+
+</div>
+</body>
+</html>
