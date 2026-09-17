@@ -1,4 +1,4 @@
-# Demo06-07：插件开发与工具调用
+# Demo06-08：插件开发与工具调用
 
 ## 知识点
 
@@ -148,6 +148,53 @@ ToolCallBehavior.allowAllKernelFunctions(true)
 | 适用场景 | 确定性计算、固定流程 | 开放域对话、灵活任务 |
 | 工具选择 | 程序指定插件和函数 | 模型根据描述自动匹配 |
 
+## 系统角色 + 工具调用 — Demo08
+
+Demo07 展示了模型自主工具调用，但没有约束回复风格。Demo08 将 **System Role** 与 **Tool Calling** 结合，实现"有性格的工具型助手"：
+
+```java
+@PostMapping("/chat")
+public Map<String, Object> chat(@RequestBody Map<String, String> request) {
+    String message = request.getOrDefault("message", "");
+
+    ChatHistory history = new ChatHistory();
+    // 注入系统角色：严谨的数学助教
+    history.addSystemMessage(
+        "你是一名严谨的数学助教。回答必须：先给结论，再给一步一句的推演过程；"
+        + "遇到需要实时时间或计算结果时，一定要使用可用工具，而不是凭空编造数字。全程使用中文。");
+    history.addUserMessage(message);
+
+    // 启用模型自主工具调用
+    InvocationContext ctx = InvocationContext.builder()
+        .withToolCallBehavior(ToolCallBehavior.allowAllKernelFunctions(true))
+        .build();
+
+    List<ChatMessageContent<?>> results = chatCompletionService
+        .getChatMessageContentsAsync(history, kernel, ctx).block();
+
+    return Map.of("systemRole", "严谨的数学助教", "toolCalling", true,
+        "reply", ChatHelper.lastAssistantText(results));
+}
+```
+
+教学要点：
+
+| 要素 | Demo07 | Demo08 |
+|------|--------|--------|
+| System Role | 无 | 严谨的数学助教 |
+| Tool Calling | `allowAllKernelFunctions(true)` | 同左 |
+| 回复风格 | 模型自由发挥 | 先结论、再推演、必须用工具 |
+| 适用场景 | 通用工具助手 | 领域专家 + 工具增强 |
+
+核心思路：
+- **System Prompt 定义"谁"** — 角色、风格、行为约束
+- **ToolCallBehavior 定义"能"** — 可使用的工具集
+- 两者组合 = 既有专业能力又有规范输出的领域助手
+
+::: tip 实践建议
+在生产环境中，几乎不会单独使用 Tool Calling 而不设 System Role。System Prompt 是控制回复质量的第一道防线——它告诉模型"你是谁、该怎么做、不该做什么"。
+:::
+
 ## 小结
 
 - `@DefineKernelFunction` + `@KernelFunctionParameter` 定义工具函数
@@ -155,3 +202,4 @@ ToolCallBehavior.allowAllKernelFunctions(true)
 - `kernel.invokeAsync(plugin, function)` 显式编排
 - `ToolCallBehavior.allowAllKernelFunctions(true)` 启用模型自主工具调用
 - 全局 Bean 注册 > 运行时动态创建
+- System Role + Tool Calling = 领域专家助手（Demo08）
