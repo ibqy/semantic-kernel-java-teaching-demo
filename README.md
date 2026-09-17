@@ -127,3 +127,57 @@ semantic-kernel-java-teaching-demo/
     └── resources/
         └── application.yml              # 配置：端口/API Key/模型/Endpoint
 ```
+
+## 实现边界
+
+### 已实现（可直接运行）
+
+| 功能 | 说明 |
+|------|------|
+| 11 个渐进式 Demo | 从基础对话到 Agentic 模式，逐步递进 |
+| 4 个 Kernel Plugin | MathPlugin / TimePlugin / TodoListPlugin / TimeTaskPlugin |
+| 双执行模式对比 | Orchestrated（显式调用）vs Agentic（模型自主调度） |
+| 流式对话 | Flux 事件流返回 |
+| JSON 结构化输出 | Prompt 约束 + Jackson 反序列化 |
+| Session 会话隔离 | ConcurrentHashMap 多会话独立 |
+| VitePress 文档站 | 4 篇教学文档 + 自定义主题 |
+
+### 教学简化（生产需增强）
+
+| 简化点 | 生产做法 |
+|--------|----------|
+| 会话状态存储在内存 ConcurrentHashMap | Redis 分布式会话，支持集群 |
+| TodoList/Reminder 用 CopyOnWriteArrayList | 数据库持久化（MySQL/PostgreSQL） |
+| 无全局异常处理 | `@ControllerAdvice` 统一异常响应 |
+| 流式结果 `.collectList().block()` | 真正的 SSE / WebSocket 推送 |
+| 无输入校验 | `@Valid` + `@Validated` 参数校验 |
+
+### 未实现（需真实 AI 服务）
+
+| 功能 | 说明 |
+|------|------|
+| AI 模型真实调用 | 需配置 OpenAI / DashScope / 本地模型的 API Key |
+| 向量检索 / RAG | 需接入 TextEmbedding + 向量存储 |
+| 多 Agent 协作 | SK 的 Agent Framework 尚未集成 |
+
+## 测试覆盖
+
+| 测试类 | 用例数 | 覆盖场景 |
+|--------|--------|----------|
+| `MathPluginTest` | 12 | 加减乘除、负数、零、除零异常 |
+| `TimePluginTest` | 2 | 格式校验、非空 |
+| `TodoListPluginTest` | 4 | 空列表、添加、多条排序、计数递增 |
+| `TimeTaskPluginTest` | 4 | 空列表、安排提醒、多条排序、计数递增 |
+| **合计** | **21** | |
+
+```bash
+mvn test
+```
+
+## License
+
+仅用于教学交流，作者：ibqy
+
+<p align="center">
+  <a href="https://github.com/ibqy">🏠 回到 ibqy 主页</a> · <a href="https://ibqy.github.io">🌐 作品集</a>
+</p>
