@@ -102,6 +102,9 @@ semantic-kernel-java-teaching-demo/
 └── src/main/
     ├── java/com/xb/semantickernel/
     │   ├── SemanticKernelTeachingDemoApplication.java  # 启动类
+    │   ├── common/
+    │   │   ├── ApiResponse.java                        # 统一响应封装
+    │   │   └── GlobalExceptionHandler.java             # 全局异常处理
     │   ├── config/
     │   │   ├── SemanticKernelConfig.java               # Kernel/ChatCompletion/Plugin Bean
     │   │   └── SemanticKernelProperties.java            # 配置属性绑定
@@ -140,6 +143,8 @@ semantic-kernel-java-teaching-demo/
 | 流式对话 | Flux 事件流返回 |
 | JSON 结构化输出 | Prompt 约束 + Jackson 反序列化 |
 | Session 会话隔离 | ConcurrentHashMap 多会话独立 |
+| 全局异常处理 | `@RestControllerAdvice` 统一错误响应 + requestId 追踪 |
+| 参数校验 | `MissingServletRequestParameterException` 自动提示缺失参数 |
 | VitePress 文档站 | 4 篇教学文档 + 自定义主题 |
 
 ### 教学简化（生产需增强）
@@ -148,9 +153,7 @@ semantic-kernel-java-teaching-demo/
 |--------|----------|
 | 会话状态存储在内存 ConcurrentHashMap | Redis 分布式会话，支持集群 |
 | TodoList/Reminder 用 CopyOnWriteArrayList | 数据库持久化（MySQL/PostgreSQL） |
-| 无全局异常处理 | `@ControllerAdvice` 统一异常响应 |
 | 流式结果 `.collectList().block()` | 真正的 SSE / WebSocket 推送 |
-| 无输入校验 | `@Valid` + `@Validated` 参数校验 |
 
 ### 未实现（需真实 AI 服务）
 
@@ -168,7 +171,8 @@ semantic-kernel-java-teaching-demo/
 | `TimePluginTest` | 2 | 格式校验、非空 |
 | `TodoListPluginTest` | 4 | 空列表、添加、多条排序、计数递增 |
 | `TimeTaskPluginTest` | 4 | 空列表、安排提醒、多条排序、计数递增 |
-| **合计** | **21** | |
+| `GlobalExceptionHandlerTest` | 6 | ApiResponse 工厂、缺失参数、非法参数、未知异常 |
+| **合计** | **27** | |
 
 ```bash
 mvn test
