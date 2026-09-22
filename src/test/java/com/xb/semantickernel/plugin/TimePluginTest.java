@@ -1,5 +1,8 @@
 package com.xb.semantickernel.plugin;
 
+/**
+ * TimePlugin 单元测试 - 验证时间格式和返回值非空
+ */
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

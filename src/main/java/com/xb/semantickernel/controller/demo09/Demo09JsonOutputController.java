@@ -1,5 +1,14 @@
 package com.xb.semantickernel.controller.demo09;
 
+/**
+ * Demo09JsonOutputController - 结构化 JSON 输出演示
+ *
+ * 演示如何让 AI 模型返回结构化 JSON 并解析为 Java 对象。
+ * 教学要点：通过 System Message 约束输出格式，再用 Jackson
+ * 反序列化。同时展示了处理模型"不守规矩"输出时的容错策略。
+ *
+ * @author ibqy
+ */
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.microsoft.semantickernel.Kernel;
 import com.microsoft.semantickernel.orchestration.InvocationContext;
@@ -29,6 +38,15 @@ public class Demo09JsonOutputController {
         this.objectMapper = objectMapper;
     }
 
+    /**
+     * 根据国家名查询信息，返回结构化 JSON
+     *
+     * 通过 System Message 严格约束模型只输出 JSON，
+     * 然后用 Jackson 解析为 CountryInfo 对象。
+     *
+     * @param request 包含 "country" 字段的请求体
+     * @return 解析后的国家信息和模型原始输出
+     */
     @PostMapping("/country")
     public Map<String, Object> country(@RequestBody Map<String, String> request) {
         String country = request.getOrDefault("country", "中国");
@@ -42,11 +60,13 @@ public class Demo09JsonOutputController {
         List<ChatMessageContent<?>> results = chatCompletionService
                 .getChatMessageContentsAsync(history, kernel, InvocationContext.builder().build()).block();
         String raw = ChatHelper.lastAssistantText(results);
+        // 清理模型可能附带的 Markdown 代码块标记
         String json = raw.replaceAll("```json", "").replaceAll("```", "").trim();
         CountryInfo info = CountryInfo.empty();
         try {
             info = objectMapper.readValue(json, CountryInfo.class);
         } catch (Exception e) {
+            // 解析失败时保留原始输出，方便排查模型"不守规矩"的情况
             info = new CountryInfo("解析失败", e.getMessage(), 0L, raw);
         }
         return Map.of("parsed", info, "rawModelOutput", raw);

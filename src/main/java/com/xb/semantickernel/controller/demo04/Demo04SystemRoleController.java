@@ -1,5 +1,14 @@
 package com.xb.semantickernel.controller.demo04;
 
+/**
+ * Demo04SystemRoleController - 系统角色设定演示
+ *
+ * 演示如何通过 System Message 为 AI 设定"人设"，
+ * 控制模型的回答风格和行为。教学要点：System Message
+ * 是对话的"隐形指令"，优先级高于普通用户消息。
+ *
+ * @author ibqy
+ */
 import com.microsoft.semantickernel.Kernel;
 import com.microsoft.semantickernel.orchestration.InvocationContext;
 import com.microsoft.semantickernel.services.chatcompletion.ChatCompletionService;
@@ -26,6 +35,15 @@ public class Demo04SystemRoleController {
         this.kernel = kernel;
     }
 
+    /**
+     * 处理带有系统角色设定的聊天请求
+     *
+     * 每次请求新建 ChatHistory 并以 SystemMessage 设定"人设"，
+     * 演示系统消息对模型回答风格的引导作用。
+     *
+     * @param request 包含 "message" 字段的请求体
+     * @return 是否应用了系统角色及 AI 的回复
+     */
     @PostMapping("/chat")
     public Map<String, Object> chat(@RequestBody Map<String, String> request) {
         String message = request.getOrDefault("message", "");

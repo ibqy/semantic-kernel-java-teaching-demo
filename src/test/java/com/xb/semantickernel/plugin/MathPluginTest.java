@@ -1,5 +1,8 @@
 package com.xb.semantickernel.plugin;
 
+/**
+ * MathPlugin 单元测试 - 验证加减乘除四则运算的正确性和边界处理
+ */
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;

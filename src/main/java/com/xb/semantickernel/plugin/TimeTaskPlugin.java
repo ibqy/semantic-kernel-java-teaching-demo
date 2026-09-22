@@ -1,5 +1,14 @@
 package com.xb.semantickernel.plugin;
 
+/**
+ * TimeTaskPlugin - 定时提醒插件
+ *
+ * 演示有状态的插件：使用内存列表保存提醒事项，
+ * 支持"安排提醒"和"列出提醒"两种操作。
+ * 教学要点：插件可以持有状态，多次工具调用之间共享数据。
+ *
+ * @author ibqy
+ */
 import com.microsoft.semantickernel.semanticfunctions.annotations.DefineKernelFunction;
 import com.microsoft.semantickernel.semanticfunctions.annotations.KernelFunctionParameter;
 import java.util.List;
@@ -7,6 +16,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 public class TimeTaskPlugin {
 
+    // 使用线程安全列表，避免并发调用工具时出现数据竞争
     private final List<String> reminders = new CopyOnWriteArrayList<>();
 
     @DefineKernelFunction(

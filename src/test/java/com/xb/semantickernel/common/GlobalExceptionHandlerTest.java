@@ -1,5 +1,8 @@
 package com.xb.semantickernel.common;
 
+/**
+ * GlobalExceptionHandler 单元测试 - 验证统一响应格式和各类异常处理逻辑
+ */
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
