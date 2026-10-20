@@ -6,7 +6,7 @@
 
 | 组件 | 版本 |
 |------|------|
-| Spring Boot | 3.4.4 |
+| Spring Boot | 3.5.16 |
 | Semantic Kernel for Java | 1.5.0 |
 | Java | 21 |
 | AI 服务 | OpenAI ChatCompletion（兼容 DashScope/本地模型） |
@@ -25,7 +25,8 @@
 | Demo08 | 角色+工具 | 系统角色 + 工具调用联合使用 | `POST /api/demo08/chat` |
 | Demo09 | JSON 结构化输出 | Prompt 约束 JSON、Jackson 反序列化 | `POST /api/demo09/country` |
 | Demo10 | 待办助手 | TodoListPlugin + ChatHistory 多轮会话 | `POST /api/demo10/chat` |
-| Demo11 | 定时任务助手 | Agentic / Orchestrated 两种模式对比、KernelArguments | `POST /api/demo11/handle` + `GET /api/demo11/invoke` |
+| Demo11 | 定时任务助手 | Agentic / Orchestrated 两种模式对比、KernelArguments | `POST /api/demo11/handle` + `GET /api/demo11/invoke` + `GET /api/demo11/tick`（定时 tick 驱动到期任务） |
+| Demo12 | RAG 检索增强 | 向量检索 + 余弦相似度 TopK + 带引用生成 + 防幻觉 | `POST /api/demo12/index/rebuild` + `POST /api/demo12/ask` + `GET /api/demo12/index/status` |
 
 ## 快速启动
 
@@ -85,7 +86,25 @@ Demo09 JSON 输出       →  Prompt 约束 + Jackson 解析
 Demo10 待办助手        →  TodoListPlugin 多轮实战
     ↓
 Demo11 定时任务助手     →  Agentic vs Orchestrated 双模式
+    ↓
+Demo12 RAG 检索增强     →  向量索引 / 余弦相似度 TopK / 带引用生成
 ```
+
+### demo12 快速体验
+
+```bash
+# 1) 建立索引（把内置知识库灌入向量库，幂等可重复调用）
+curl -X POST http://localhost:8080/api/demo12/index/rebuild
+
+# 2) RAG 问答（返回答案 + 引用文档 + 相似度）
+curl -X POST http://localhost:8080/api/demo12/ask \
+  -H "Content-Type: application/json" \
+  -d '{"question":"配送费多少钱？"}'
+```
+
+> 检索内核是自研的迷你向量库（余弦相似度 + TopK），embedding 用 SK 真实的
+> `OpenAITextEmbeddingGenerationService`（需配置 `SEMANTIC_KERNEL_EMBEDDING_MODEL`）。
+> 索引与检索逻辑有 14 个离线单测覆盖（假 embedding 服务，不需要 API Key）。
 
 ## 项目结构
 

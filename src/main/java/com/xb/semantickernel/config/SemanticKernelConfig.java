@@ -17,6 +17,8 @@ import com.microsoft.semantickernel.aiservices.openai.chatcompletion.OpenAIChatC
 import com.microsoft.semantickernel.plugin.KernelPlugin;
 import com.microsoft.semantickernel.plugin.KernelPluginFactory;
 import com.microsoft.semantickernel.services.chatcompletion.ChatCompletionService;
+import com.microsoft.semantickernel.services.textembedding.TextEmbeddingGenerationService;
+import com.microsoft.semantickernel.aiservices.openai.textembedding.OpenAITextEmbeddingGenerationService;
 import com.xb.semantickernel.plugin.MathPlugin;
 import com.xb.semantickernel.plugin.TimePlugin;
 import com.xb.semantickernel.plugin.TimeTaskPlugin;
@@ -86,6 +88,26 @@ public class SemanticKernelConfig {
             builder.withPlugin(plugin);
         }
         return builder.build();
+    }
+
+    /**
+     * 创建文本嵌入（Embedding）服务 —— demo12 RAG 的检索内核供电站
+     *
+     * 注意与 ChatCompletionService 共用同一个 OpenAIAsyncClient（连接复用），
+     * 但 modelId 用独立的 embedding 模型（如 text-embedding-3-small）——
+     * 对话模型和嵌入模型是两个不同的模型，配置项也必须分开。
+     *
+     * @param client Azure/OpenAI 兼容异步客户端
+     * @param props  配置属性，提供嵌入模型标识
+     * @return 嵌入服务实例（供 RagService 注入）
+     */
+    @Bean
+    public TextEmbeddingGenerationService textEmbeddingGenerationService(
+            OpenAIAsyncClient client, SemanticKernelProperties props) {
+        return OpenAITextEmbeddingGenerationService.builder()
+                .withModelId(props.embeddingModel())
+                .withOpenAIAsyncClient(client)
+                .build();
     }
 
     /** 将 MathPlugin 包装为 KernelPlugin，提供加减乘除工具函数 */

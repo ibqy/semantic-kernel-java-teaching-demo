@@ -8,5 +8,7 @@ spring:
 semantickernel:
   api-key: ${OPENAI_API_KEY:demo-placeholder}
   model: ${SEMANTIC_KERNEL_MODEL:qwen+-placeholder}
+  # 嵌入模型（demo12 RAG 用）——与对话模型是两个不同模型，DashScope 用 text-embedding-v3
+  embedding-model: ${SEMANTIC_KERNEL_EMBEDDING_MODEL:text-embedding-3-small}
   endpoint: ${SEMANTIC_KERNEL_ENDPOINT:http://localhost:11434/v1}
   temperature: 0.7

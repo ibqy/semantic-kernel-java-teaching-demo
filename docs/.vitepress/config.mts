@@ -34,7 +34,8 @@ export default defineConfig({
           { text: '01 · Kernel 基础', link: '/01-kernel-basics' },
           { text: '02 · 插件开发', link: '/02-plugins-guide' },
           { text: '03 · 对话历史记忆', link: '/03-chat-history' },
-          { text: '04 · Agentic 模式', link: '/04-agentic-patterns' }
+          { text: '04 · Agentic 模式', link: '/04-agentic-patterns' },
+          { text: '05 · RAG 检索增强', link: '/05-rag-guide' }
         ]
       }
     ],
