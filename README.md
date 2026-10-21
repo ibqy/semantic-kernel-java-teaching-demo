@@ -1,3 +1,17 @@
+<p align="center">
+  <a href="https://ibqy.github.io/semantic-kernel-java-teaching-demo/"><img src="https://img.shields.io/badge/在线课件-2F6FEB?style=flat-square" alt="在线课件"></a>
+  <img src="https://img.shields.io/badge/Java-21-2266EE?style=flat-square" alt="Java 21">
+  <img src="https://img.shields.io/badge/Spring_Boot-3.5.16-6DB33F?style=flat-square" alt="Spring Boot 3.5.16">
+  <img src="https://img.shields.io/badge/Semantic_Kernel-1.5.0-0078D4?style=flat-square" alt="Semantic Kernel 1.5.0">
+  <img src="https://img.shields.io/github/license/ibqy/semantic-kernel-java-teaching-demo?style=flat-square" alt="License">
+  <img src="https://img.shields.io/github/stars/ibqy/semantic-kernel-java-teaching-demo?style=flat-square" alt="Stars">
+</p>
+
+> **课程位置** 阶段 2 · AI 应用工程入门 — 第 3 站（跨框架对照）
+> [上一站 Spring AI Alibaba](https://ibqy.github.io/spring-ai-alibaba-teaching-demo/) → **Semantic Kernel** → [下一站 AgentScope](https://ibqy.github.io/agentscope-java-teaching-demo/) ｜ [完整学习路线](https://ibqy.github.io/curriculum)
+
+---
+
 # Semantic Kernel for Java 教学演示
 
 基于 [Microsoft Semantic Kernel for Java](https://github.com/microsoft/semantic-kernel-java) 构建的教学演示项目，通过 11 个渐进式 Demo 帮助初学者掌握 Semantic Kernel 的核心概念，涵盖 Kernel 构建、插件开发、对话管理、工具调用和 Agentic 模式。

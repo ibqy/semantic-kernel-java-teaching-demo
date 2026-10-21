@@ -25,6 +25,7 @@ export default defineConfig({
   themeConfig: {
     nav: [
       { text: '首页', link: '/' },
+      { text: '学习路径', link: 'https://ibqy.github.io/curriculum' },
       { text: 'GitHub', link: 'https://github.com/ibqy/semantic-kernel-java-teaching-demo' }
     ],
     sidebar: [
@@ -35,7 +36,8 @@ export default defineConfig({
           { text: '02 · 插件开发', link: '/02-plugins-guide' },
           { text: '03 · 对话历史记忆', link: '/03-chat-history' },
           { text: '04 · Agentic 模式', link: '/04-agentic-patterns' },
-          { text: '05 · RAG 检索增强', link: '/05-rag-guide' }
+          { text: '05 · RAG 检索增强', link: '/05-rag-guide' },
+          { text: '06 · 框架选型与代码地图', link: '/06-framework-selection-code-map' }
         ]
       }
     ],
